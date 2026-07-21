@@ -1,0 +1,14 @@
+PRODUCT_NAME = Hussle
+PRODUCT_BUNDLE_IDENTIFIER = com.hussle.app
+MARKETING_VERSION = 0.12.16
+CURRENT_PROJECT_VERSION = 16
+SWIFT_VERSION = 5.10
+IPHONEOS_DEPLOYMENT_TARGET = 17.0
+
+// Safe defaults: when local credentials are absent, Hussle starts in Demo Mode.
+SUPABASE_URL =
+SUPABASE_ANON_KEY =
+APP_ENVIRONMENT = development
+
+// Local machine configuration. This file is intentionally excluded from Git.
+#include? "Secrets.xcconfig"

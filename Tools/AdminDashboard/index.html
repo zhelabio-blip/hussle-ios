@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hussle Moderation</title>
+  <style>
+    :root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; color:#241b35; background:#f8f6fc; }
+    body { margin:0; } header { padding:24px 32px; background:white; border-bottom:1px solid #ebe7f2; display:flex; justify-content:space-between; }
+    main { max-width:1050px; margin:32px auto; padding:0 20px; } .card { background:white; border:1px solid #ebe7f2; border-radius:20px; padding:20px; margin-bottom:16px; box-shadow:0 8px 28px rgba(57,37,84,.06); }
+    button { border:0; border-radius:12px; padding:11px 15px; font-weight:650; cursor:pointer; } .primary { background:#7656d6; color:white; } .danger { background:#fbe9ee; color:#ad2347; } .muted { color:#746c80; }
+    textarea, select, input { width:100%; box-sizing:border-box; padding:12px; border:1px solid #ddd6e8; border-radius:12px; margin:8px 0 14px; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; } .badge { display:inline-block; background:#eee8fb; color:#6045b4; border-radius:999px; padding:5px 10px; font-size:12px; font-weight:700; }
+  </style>
+</head>
+<body>
+<header><strong>Hussle Moderation</strong><span class="muted" id="status">Not connected</span></header>
+<main>
+  <div class="card" id="config">
+    <h2>Connect moderator account</h2>
+    <input id="url" placeholder="Supabase URL" />
+    <input id="key" placeholder="Supabase anon key" />
+    <input id="email" type="email" placeholder="Moderator email" />
+    <input id="password" type="password" placeholder="Password" />
+    <button class="primary" id="login">Sign in</button>
+  </div>
+  <div id="queue" hidden>
+    <div class="row"><button class="primary" id="claim">Claim next report</button><button id="refresh">Refresh my queue</button></div>
+    <div id="cases"></div>
+  </div>
+</main>
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  let client;
+  const $ = (id) => document.getElementById(id);
+  $('login').onclick = async () => {
+    client = createClient($('url').value.trim(), $('key').value.trim());
+    const { error } = await client.auth.signInWithPassword({ email:$('email').value, password:$('password').value });
+    if (error) return alert(error.message);
+    $('status').textContent = 'Moderator connected'; $('config').hidden = true; $('queue').hidden = false; await refresh();
+  };
+  $('claim').onclick = async () => { const { error } = await client.rpc('claim_next_report'); if(error) alert(error.message); await refresh(); };
+  $('refresh').onclick = refresh;
+  async function refresh() {
+    const { data:{user} } = await client.auth.getUser();
+    const { data, error } = await client.from('reports').select('*').eq('assigned_moderator_id', user.id).in('status',['in_review','open']).order('priority',{ascending:false});
+    if(error) return alert(error.message);
+    $('cases').innerHTML = (data ?? []).map(renderCase).join('') || '<div class="card"><p class="muted">No assigned reports.</p></div>';
+    document.querySelectorAll('[data-resolve]').forEach(button => button.onclick = resolve);
+  }
+  function renderCase(r) { return `<article class="card"><span class="badge">${escapeHTML(r.category)}</span><h3>Report ${r.id.slice(0,8)}</h3><p>${escapeHTML(r.description || 'No additional description')}</p><p class="muted">Priority ${r.priority} · ${new Date(r.created_at).toLocaleString()}</p><select id="d-${r.id}"><option>no_action</option><option>warning</option><option>content_removed</option><option>profile_paused</option><option>temporary_suspension</option><option>permanent_ban</option></select><textarea id="n-${r.id}" placeholder="Internal moderation notes"></textarea><button class="primary" data-resolve="${r.id}">Resolve report</button></article>`; }
+  async function resolve(event) { const id=event.target.dataset.resolve; const {error}=await client.rpc('resolve_report',{report_id:id,decision:$(`d-${id}`).value,notes:$(`n-${id}`).value}); if(error) alert(error.message); await refresh(); }
+  function escapeHTML(value) { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+</script>
+</body></html>

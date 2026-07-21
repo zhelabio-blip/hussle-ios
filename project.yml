@@ -1,0 +1,70 @@
+name: Hussle
+options:
+  bundleIdPrefix: com.hussle
+  deploymentTarget:
+    iOS: '17.0'
+configs:
+  Debug: debug
+  Staging: release
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Staging: Configs/Staging.xcconfig
+  Release: Configs/Release.xcconfig
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.hussle.app
+    SWIFT_VERSION: 5.10
+targets:
+  Hussle:
+    type: application
+    platform: iOS
+    sources:
+      - HussleApp/Hussle
+    resources:
+      - path: HussleApp/Hussle/Resources/DemoImages
+    configFiles:
+      Debug: Configs/Debug.xcconfig
+      Staging: Configs/Staging.xcconfig
+      Release: Configs/Release.xcconfig
+    info:
+      path: HussleApp/Hussle/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Hussle
+        UILaunchScreen: {}
+        NSLocationWhenInUseUsageDescription: Hussle uses your approximate location to show compatible dogs nearby.
+        NSPhotoLibraryUsageDescription: Add photos to create your dog’s profile.
+        NSCameraUsageDescription: Take a photo for your dog’s profile.
+        SUPABASE_URL: $(SUPABASE_URL)
+        SUPABASE_ANON_KEY: $(SUPABASE_ANON_KEY)
+        APP_ENVIRONMENT: $(APP_ENVIRONMENT)
+        UIBackgroundModes:
+          - remote-notification
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: '1'
+        INFOPLIST_FILE: HussleApp/Hussle/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: HussleApp/Hussle/Resources/Hussle.entitlements
+
+  HussleTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests/Unit
+    dependencies:
+      - target: Hussle
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+
+  HussleUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - Tests/UI
+    dependencies:
+      - target: Hussle
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Hussle
