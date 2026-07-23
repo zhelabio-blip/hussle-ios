@@ -18,10 +18,12 @@
 | Automated UI tests | Not confirmed | No claim of execution |
 | Approval | Passed | Tony explicitly approved v0.12.20 as the latest stable build on 23 July 2026 |
 | Candidate documentation | Passed | Final Candidate documentation commit `dfba6921aa784d6575f8d0a485682ae98c7035bf` |
-| `main` promotion | Passed | PR #1 merged `candidate/v0.12.20-exit-demo` into `main`; merge commit `1d64a3544b3311a03783ca23dd6a38abe9289d86` |
-| Generated-project policy | Passed in maintenance | `.gitignore` includes `Hussle.xcodeproj/`; generated Xcode project remains local and untracked |
-| Final documentation alignment | Passed in maintenance | Master Guide, Worklog, changelog, current status, and release audit record the actual merged state |
-| Stable tag | Pending final administration | Create `v0.12.20-stable` on the final `main` commit after maintenance merge |
+| Product promotion | Passed | PR #1 merged `candidate/v0.12.20-exit-demo` into `main`; merge commit `1d64a3544b3311a03783ca23dd6a38abe9289d86` |
+| Generated-project policy | Passed | `.gitignore` includes `Hussle.xcodeproj/`; generated Xcode project remains local and untracked |
+| Release-finalization maintenance | Passed | PR #2 merged documentation and repository hygiene into `main`; merge commit `718e1aa4315d5e13c12080394203da086db35147` |
+| Product regression risk from PR #2 | None identified | PR #2 changed only `.gitignore` and documentation files |
+| Final documentation alignment | Passed after post-merge record | Master Guide, Worklog, current status, and release audit record PR #2 as completed |
+| Stable tag | Pending final administration | Create `v0.12.20-stable` on the final `main` commit after the post-merge record is merged |
 
 ## Release decision
 
@@ -34,16 +36,15 @@ The code and corrected UI were built and manually accepted. Automated test execu
 Completed:
 
 1. final Candidate documentation committed;
-2. PR #1 created;
-3. PR #1 merged into `main`;
+2. PR #1 merged the approved product into `main`;
+3. PR #2 merged generated-project ignore policy and release-documentation alignment into `main`;
 4. previous v0.12.18 branch retained;
-5. v0.12.20 Candidate branch retained.
-
-Release-finalization maintenance adds only repository hygiene and documentation alignment. It does not change product code or behavior.
+5. v0.12.20 Candidate branch retained;
+6. no product code changed during release-finalization maintenance.
 
 ## Remaining action
 
-After maintenance is merged into `main`:
+After `maintenance/v0.12.20-post-merge-record` is merged into `main`:
 
 1. create and push tag `v0.12.20-stable` on the final `main` commit;
 2. fetch the final state in GitHub Desktop;

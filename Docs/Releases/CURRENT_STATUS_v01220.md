@@ -1,13 +1,14 @@
 # Current Status — v0.12.20
 
-**Status:** Last Approved Build; promoted to `main` through PR #1.  
+**Status:** Last Approved Build; product and release-finalization maintenance are in `main`.  
 **Source branch:** `candidate/v0.12.18-demo-quality`  
 **Exact source commit:** `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`  
 **Approved Candidate branch:** `candidate/v0.12.20-exit-demo`  
 **Approved code commit:** `c0540bc273e35be036ff46b9a9b6cd2c841bd9ef`  
 **Final Candidate documentation commit:** `dfba6921aa784d6575f8d0a485682ae98c7035bf`  
-**Promotion merge commit:** `1d64a3544b3311a03783ca23dd6a38abe9289d86`  
-**Stable tag:** pending until release-finalization maintenance is merged into `main`.
+**Product promotion merge commit:** `1d64a3544b3311a03783ca23dd6a38abe9289d86`  
+**Release-finalization merge commit:** `718e1aa4315d5e13c12080394203da086db35147`  
+**Stable tag:** pending on the final `main` commit after this post-merge documentation record is merged.
 
 ## Approved scope
 
@@ -51,32 +52,32 @@ v0.12.20 adds one product behavior:
 - Header correction was committed as `c0540bc273e35be036ff46b9a9b6cd2c841bd9ef`.
 - Tony rebuilt/rechecked the corrected build and confirmed it looked normal and worked without observed glitches.
 - Tony explicitly approved v0.12.20 as the latest stable build.
-- Pull Request #1 was merged from `candidate/v0.12.20-exit-demo` into `main`.
+- Pull Request #1 merged `candidate/v0.12.20-exit-demo` into `main`.
+- Pull Request #2 merged repository hygiene and release-documentation alignment into `main`.
 
 ## Validation not confirmed
 
 - Automated unit tests: not confirmed as executed.
 - Automated UI tests: not confirmed as executed.
 
-## Repository maintenance
+## Repository maintenance completed
 
-Release-finalization maintenance:
+PR #2 merged:
 
 ```text
-maintenance/v0.12.20-release-finalization
+maintenance/v0.12.20-release-finalization → main
 ```
 
-This branch:
+It:
 
-- adds `Hussle.xcodeproj/` to `.gitignore`;
-- aligns Master Guide, Worklog, changelog, current status, and release audit with the completed PR #1 merge;
-- documents GitHub Desktop, stash, generated-file, and release-process lessons.
-
-No app code, Demo data, assets, backend schema, or product behavior is changed by this maintenance.
+- added `Hussle.xcodeproj/` to `.gitignore`;
+- aligned Master Guide, Worklog, changelog, current status, and release audit with the completed PR #1 merge;
+- documented GitHub Desktop, stash, generated-file, and release-process lessons;
+- changed no app code, Demo data, assets, backend schema, or product behavior.
 
 ## Remaining release administration
 
-1. Merge `maintenance/v0.12.20-release-finalization` into `main`.
+1. Merge `maintenance/v0.12.20-post-merge-record` into `main`.
 2. Create and push `v0.12.20-stable` on the resulting final `main` commit.
 3. In GitHub Desktop, press **Fetch origin**.
 4. Keep `candidate/v0.12.18-demo-quality` and `candidate/v0.12.20-exit-demo` for history.
