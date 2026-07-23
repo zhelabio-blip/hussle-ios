@@ -21,9 +21,10 @@
 | Product promotion | Passed | PR #1 merged `candidate/v0.12.20-exit-demo` into `main`; merge commit `1d64a3544b3311a03783ca23dd6a38abe9289d86` |
 | Generated-project policy | Passed | `.gitignore` includes `Hussle.xcodeproj/`; generated Xcode project remains local and untracked |
 | Release-finalization maintenance | Passed | PR #2 merged documentation and repository hygiene into `main`; merge commit `718e1aa4315d5e13c12080394203da086db35147` |
-| Product regression risk from PR #2 | None identified | PR #2 changed only `.gitignore` and documentation files |
-| Final documentation alignment | Passed after post-merge record | Master Guide, Worklog, current status, and release audit record PR #2 as completed |
-| Stable tag | Pending final administration | Create `v0.12.20-stable` on the final `main` commit after the post-merge record is merged |
+| Post-merge documentation record | Passed | PR #3 merged the completed finalization record into `main`; merge commit `c3b8001ff50d3c9268b65fbc34e42bff4ae2aa3a` |
+| Product regression risk from PR #2 and PR #3 | None identified | Both PRs changed only `.gitignore` and documentation files |
+| Final documentation alignment | Passed | Master Guide, Worklog, current status, and release audit record all completed merges |
+| Stable tag | Pending final administration | Create `v0.12.20-stable` on the final current `main` commit |
 
 ## Release decision
 
@@ -38,14 +39,13 @@ Completed:
 1. final Candidate documentation committed;
 2. PR #1 merged the approved product into `main`;
 3. PR #2 merged generated-project ignore policy and release-documentation alignment into `main`;
-4. previous v0.12.18 branch retained;
-5. v0.12.20 Candidate branch retained;
-6. no product code changed during release-finalization maintenance.
+4. PR #3 recorded the completed release finalization in permanent documentation;
+5. previous v0.12.18 branch retained;
+6. v0.12.20 Candidate branch retained;
+7. no product code changed during release-finalization maintenance.
 
 ## Remaining action
 
-After `maintenance/v0.12.20-post-merge-record` is merged into `main`:
-
-1. create and push tag `v0.12.20-stable` on the final `main` commit;
-2. fetch the final state in GitHub Desktop;
-3. retain both approved Candidate branches for history.
+1. Create and push tag `v0.12.20-stable` on the final current `main` commit.
+2. Fetch the final state in GitHub Desktop.
+3. Retain both approved Candidate branches for history.
