@@ -84,6 +84,42 @@ Result:
 - `candidate/v0.12.20-exit-demo` remains retained for history.
 - `main` is one merge commit ahead of the Candidate while file contents are identical at the promotion point.
 
+## Release-finalization maintenance
+
+Maintenance branch:
+
+```text
+maintenance/v0.12.20-release-finalization
+```
+
+Pull Request:
+
+```text
+#2 — Finalize v0.12.20 release documentation
+```
+
+Result:
+
+- PR #2 was successfully merged into `main`.
+- Merge commit: `718e1aa4315d5e13c12080394203da086db35147`.
+- `.gitignore` now includes `Hussle.xcodeproj/`.
+- Master Guide, Worklog, changelog, current status, and release audit were aligned with the completed PR #1 promotion.
+- No app code, Demo data, visual assets, backend schema, or product behavior changed in PR #2.
+
+## Post-merge documentation record
+
+Current documentation-only branch:
+
+```text
+maintenance/v0.12.20-post-merge-record
+```
+
+Purpose:
+
+- record the successful PR #2 merge;
+- make the final repository state self-consistent before tagging;
+- leave only one remaining release-administration action: create `v0.12.20-stable` on final `main`.
+
 ## Important incidents and lessons
 
 ### Wrong-build incident before v0.12.20
@@ -142,7 +178,7 @@ GitHub Desktop showed four new files because the directory was not ignored.
 
 Permanent resolution:
 
-- `.gitignore` now includes `Hussle.xcodeproj/` in release-finalization maintenance;
+- `.gitignore` now includes `Hussle.xcodeproj/`;
 - the folder remains usable locally by Xcode;
 - the generated project must not be committed;
 - tracked source, XcodeGen configuration, and app resources remain the source of truth.
@@ -234,28 +270,14 @@ Release-finalization maintenance:
 
 Tony approved v0.12.20 as the Last Approved Build.
 
-`main` already contains the approved product through PR #1. The final stable tag must be created only after release-finalization maintenance is merged.
-
-## Current maintenance branch
-
-```text
-maintenance/v0.12.20-release-finalization
-```
-
-Purpose:
-
-- ignore generated `Hussle.xcodeproj/`;
-- align all release documentation with the already completed PR #1 merge;
-- document GitHub Desktop behavior and today’s incidents;
-- prepare the final stable tag point.
+`main` contains the approved product and merged release-finalization maintenance. The final stable tag must be created only after this post-merge documentation record is merged.
 
 ## Next exact step
 
-1. Review the maintenance branch diff against `main`.
-2. Merge the maintenance Pull Request into `main`.
-3. Create and push `v0.12.20-stable` on the final `main` commit.
-4. In GitHub Desktop, press **Fetch origin**.
-5. Keep the v0.12.18 and v0.12.20 Candidate branches.
-6. Do not restore the existing stash until its contents are intentionally reviewed.
+1. Review and merge `maintenance/v0.12.20-post-merge-record` into `main`.
+2. Create and push `v0.12.20-stable` on the resulting final `main` commit.
+3. In GitHub Desktop, press **Fetch origin**.
+4. Keep the v0.12.18 and v0.12.20 Candidate branches.
+5. Do not restore the existing stash until its contents are intentionally reviewed.
 
 ---
