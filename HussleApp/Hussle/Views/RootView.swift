@@ -27,6 +27,7 @@ struct RootView: View {
         .task {
             if store.launchState == .loading { await store.bootstrap() }
         }
+        .demoExitControl()
     }
 }
 

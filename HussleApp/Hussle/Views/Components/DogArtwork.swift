@@ -5,12 +5,13 @@ private enum DemoImageLoader {
     static func image(named name: String) -> UIImage? {
         guard !name.isEmpty else { return nil }
         if let image = UIImage(named: name) { return image }
-        if let image = UIImage(named: "\(name).jpg") { return image }
-
-        for subdirectory in [nil, "DemoImages", "Resources/DemoImages"] {
-            if let url = Bundle.main.url(forResource: name, withExtension: "jpg", subdirectory: subdirectory),
-               let image = UIImage(contentsOfFile: url.path) {
-                return image
+        for fileExtension in ["png", "jpg", "jpeg"] {
+            if let image = UIImage(named: "\(name).\(fileExtension)") { return image }
+            for subdirectory in [nil, "DemoImages", "Resources/DemoImages"] {
+                if let url = Bundle.main.url(forResource: name, withExtension: fileExtension, subdirectory: subdirectory),
+                   let image = UIImage(contentsOfFile: url.path) {
+                    return image
+                }
             }
         }
         return nil

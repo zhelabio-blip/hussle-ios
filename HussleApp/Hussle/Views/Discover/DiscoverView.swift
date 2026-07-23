@@ -30,15 +30,32 @@ struct DiscoverView: View {
     }
 
     private var header: some View {
-        HStack {
+        HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(store.currentDog.name).font(.headline)
                 Text("\(store.currentDog.breed) · \(store.currentDog.age) y.o.").font(.caption).foregroundStyle(.secondary)
             }
-            Spacer()
-            Text("Hussle").font(.title.bold()).foregroundStyle(HussleTheme.primary).accessibilityIdentifier("discoverTitle")
-            Spacer()
-            NavigationLink { DiscoverySettingsView() } label: { Image(systemName: "slider.horizontal.3").font(.title3) }
+
+            Spacer(minLength: 8)
+
+            Text("Hussle")
+                .font(.title.bold())
+                .foregroundStyle(HussleTheme.primary)
+                .accessibilityIdentifier("discoverTitle")
+
+            if !store.isDemoMode {
+                Spacer(minLength: 8)
+            }
+
+            NavigationLink { DiscoverySettingsView() } label: {
+                Image(systemName: "slider.horizontal.3").font(.title3)
+            }
+
+            if store.isDemoMode {
+                Color.clear
+                    .frame(width: 88)
+                    .accessibilityHidden(true)
+            }
         }
         .padding(.vertical, 6)
     }
@@ -82,14 +99,31 @@ struct DogCard: View {
                 DogOwnerPortrait(dog: dog, dogSize: 214, ownerSize: 62)
                     .frame(maxWidth: .infinity)
 
-                if dog.isTopMatch {
-                    Label("Top match", systemImage: "star.fill")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 11)
-                        .padding(.vertical, 7)
-                        .background(.black.opacity(0.62))
-                        .clipShape(Capsule())
+                HStack(alignment: .top) {
+                    if dog.isTopMatch {
+                        Label("Top match", systemImage: "star.fill")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 11)
+                            .padding(.vertical, 7)
+                            .background(.black.opacity(0.62))
+                            .clipShape(Capsule())
+                    }
+
+                    Spacer()
+
+                    if !dog.activityStatus.isEmpty {
+                        Label(dog.activityStatus, systemImage: "circle.fill")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(HussleTheme.text)
+                            .symbolRenderingMode(.monochrome)
+                            .padding(.horizontal, 11)
+                            .padding(.vertical, 7)
+                            .background(.white.opacity(0.94))
+                            .clipShape(Capsule())
+                            .shadow(color: .black.opacity(0.06), radius: 5, y: 2)
+                            .accessibilityIdentifier("activityStatus")
+                    }
                 }
             }
 
@@ -110,6 +144,14 @@ struct DogCard: View {
                 Text("\(dog.sex.rawValue) · \(dog.breed)")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+
+                if !dog.recommendationReason.isEmpty {
+                    Label(dog.recommendationReason, systemImage: "sparkles")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(HussleTheme.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("recommendationReason")
+                }
 
                 HStack(spacing: 14) {
                     Label("\(dog.distanceKm, specifier: "%.1f") km", systemImage: "mappin.and.ellipse")

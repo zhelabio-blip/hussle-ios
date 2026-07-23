@@ -25,6 +25,14 @@ struct MatchView: View {
                     .font(.title3)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
+
+                if !dog.recommendationReason.isEmpty {
+                    Label(dog.recommendationReason, systemImage: "sparkles")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(HussleTheme.primary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 16)
+                }
             }
 
             VStack(spacing: 14) {
@@ -45,6 +53,7 @@ struct MatchView: View {
         }
         .padding(.vertical, 24)
         .background(HussleTheme.background.ignoresSafeArea())
+        .demoExitControl()
     }
 
     private func dogMatchPortrait(_ dog: Dog) -> some View {
