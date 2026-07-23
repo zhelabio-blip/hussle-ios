@@ -108,17 +108,24 @@ Result:
 
 ## Post-merge documentation record
 
-Current documentation-only branch:
+Branch:
 
 ```text
 maintenance/v0.12.20-post-merge-record
 ```
 
-Purpose:
+Pull Request:
 
-- record the successful PR #2 merge;
-- make the final repository state self-consistent before tagging;
-- leave only one remaining release-administration action: create `v0.12.20-stable` on final `main`.
+```text
+#3 — Record merged v0.12.20 release finalization
+```
+
+Result:
+
+- PR #3 was successfully merged into `main`.
+- Merge commit: `c3b8001ff50d3c9268b65fbc34e42bff4ae2aa3a`.
+- The repository documentation now records PR #2 as completed.
+- No app code, Demo data, visual assets, backend schema, or product behavior changed in PR #3.
 
 ## Important incidents and lessons
 
@@ -270,14 +277,13 @@ Release-finalization maintenance:
 
 Tony approved v0.12.20 as the Last Approved Build.
 
-`main` contains the approved product and merged release-finalization maintenance. The final stable tag must be created only after this post-merge documentation record is merged.
+`main` contains the approved product, repository hygiene, and finalized release documentation. The only remaining release-administration action is the stable tag.
 
 ## Next exact step
 
-1. Review and merge `maintenance/v0.12.20-post-merge-record` into `main`.
-2. Create and push `v0.12.20-stable` on the resulting final `main` commit.
-3. In GitHub Desktop, press **Fetch origin**.
-4. Keep the v0.12.18 and v0.12.20 Candidate branches.
-5. Do not restore the existing stash until its contents are intentionally reviewed.
+1. Create and push `v0.12.20-stable` on the final current `main` commit.
+2. In GitHub Desktop, press **Fetch origin**.
+3. Keep the v0.12.18 and v0.12.20 Candidate branches.
+4. Do not restore the existing stash until its contents are intentionally reviewed.
 
 ---
