@@ -105,7 +105,9 @@ struct DogEditorView: View {
             Button("OK", role: .cancel) { saveError = nil }
         } message: { Text(saveError ?? "") }
         .sheet(isPresented: $showVaccinations) {
-            NavigationStack { VaccinationsEditorView(vaccinations: $dog.vaccinations) }
+            NavigationStack {
+                VaccinationsEditorView(vaccinations: $dog.vaccinations, showsDemoExit: true)
+            }
         }
     }
 
