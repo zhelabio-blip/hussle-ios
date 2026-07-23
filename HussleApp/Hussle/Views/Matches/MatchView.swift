@@ -53,6 +53,7 @@ struct MatchView: View {
         }
         .padding(.vertical, 24)
         .background(HussleTheme.background.ignoresSafeArea())
+        .demoExitControl()
     }
 
     private func dogMatchPortrait(_ dog: Dog) -> some View {
