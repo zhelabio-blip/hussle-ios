@@ -5,6 +5,12 @@ struct VaccinationsEditorView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var vaccinations: [Vaccination]
     @State private var showAdd = false
+    let showsDemoExit: Bool
+
+    init(vaccinations: Binding<[Vaccination]>, showsDemoExit: Bool = false) {
+        _vaccinations = vaccinations
+        self.showsDemoExit = showsDemoExit
+    }
 
     var body: some View {
         List {
@@ -38,6 +44,7 @@ struct VaccinationsEditorView: View {
         .sheet(isPresented: $showAdd) {
             NavigationStack { AddVaccinationView { vaccinations.append($0) } }
         }
+        .demoExitControl(isEnabled: showsDemoExit)
     }
 }
 
@@ -78,6 +85,7 @@ struct AddVaccinationView: View {
                 Button("Save") { save() }
             }
         }
+        .demoExitControl()
     }
 
     private var trimmedName: String { name.trimmingCharacters(in: .whitespacesAndNewlines) }
