@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.12.20 — Exit Demo — Approved
+## v0.12.20 — Exit Demo — Approved and promoted
 - Created directly from `candidate/v0.12.18-demo-quality` commit `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`.
 - Added a compact secondary `Exit Demo` control while Demo Mode is active.
 - Kept the control available through onboarding, all main tabs, pushed navigation screens, Match, Report, and nested vaccination sheets.
@@ -13,7 +13,9 @@
 - Corrected the Demo header spacing in commit `c0540bc273e35be036ff46b9a9b6cd2c841bd9ef`.
 - Tony manually rechecked the corrected build and approved v0.12.20 as the latest stable build on 23 July 2026.
 - Automated unit/UI test execution was not confirmed and must not be claimed.
-- Stable tag `v0.12.20-stable` and merge to `main` remain release-administration steps after the final documentation commit is pulled.
+- Pull Request #1 merged the approved Candidate into `main` at merge commit `1d64a3544b3311a03783ca23dd6a38abe9289d86`.
+- Added release-finalization maintenance to ignore generated `Hussle.xcodeproj/` and align repository documentation.
+- Stable tag `v0.12.20-stable` must be created on the final `main` commit after maintenance is merged.
 
 ## v0.12.18 — Demo Quality Update
 - Replaced the bundled Demo library with 16 approved PNG portraits: eight dogs and eight owners.

@@ -2,8 +2,11 @@
 
 ## Source
 
-- Branch: `candidate/v0.12.18-demo-quality`
-- Commit: `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`
+- Source branch: `candidate/v0.12.18-demo-quality`
+- Source commit: `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`
+- Approved Candidate branch: `candidate/v0.12.20-exit-demo`
+- Approved code commit: `c0540bc273e35be036ff46b9a9b6cd2c841bd9ef`
+- Final Candidate documentation commit: `dfba6921aa784d6575f8d0a485682ae98c7035bf`
 
 ## Added
 
@@ -18,6 +21,7 @@
 - Marketing version: `0.12.20`.
 - Build number: `20`.
 - Discover header spacing in Demo Mode was corrected to prevent collision between Exit Demo, the Hussle logo, and the settings icon.
+- Repository maintenance now ignores generated `Hussle.xcodeproj/` output.
 
 ## Preserved
 
@@ -43,8 +47,20 @@
 - Unit test execution.
 - UI test execution.
 
-## Approval
+## Approval and promotion
 
 Tony approved v0.12.20 as the latest stable build on 23 July 2026.
 
-The final stable tag and `main` promotion must be performed after the documentation commit is pulled in GitHub Desktop.
+Pull Request #1 merged:
+
+```text
+candidate/v0.12.20-exit-demo → main
+```
+
+Promotion merge commit:
+
+```text
+1d64a3544b3311a03783ca23dd6a38abe9289d86
+```
+
+The final stable tag `v0.12.20-stable` must be created on the final `main` commit after release-finalization maintenance is merged.

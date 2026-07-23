@@ -8,7 +8,7 @@ This file records dated project progress, evidence, lessons, and the next exact 
 
 ## Session objective
 
-Create a new build from the preserved v0.12.18 Demo Quality branch, add Exit Demo throughout Demo Mode, verify it on Tony’s Mac, and promote the accepted result toward the next stable release.
+Create a new build from the preserved v0.12.18 Demo Quality branch, add Exit Demo throughout Demo Mode, verify it on Tony’s Mac, approve it, promote it to `main`, and finalize repository documentation and local GitHub Desktop behavior.
 
 ## Approved source
 
@@ -19,16 +19,17 @@ Commit: 88d7195078a56bb30b68bd8cfff40f6ef72c26c3
 
 The source branch was not modified.
 
-## New Candidate
+## Approved v0.12.20 Candidate
 
 ```text
 Branch: candidate/v0.12.20-exit-demo
 Approved code commit: c0540bc273e35be036ff46b9a9b6cd2c841bd9ef
+Final Candidate documentation commit: dfba6921aa784d6575f8d0a485682ae98c7035bf
 Version: 0.12.20
 Build: 20
 ```
 
-## Completed work
+## Completed product work
 
 - Created v0.12.20 directly from the exact v0.12.18 source commit.
 - Added a compact `Exit Demo` control visible only in Demo Mode.
@@ -40,7 +41,7 @@ Build: 20
 - Updated marketing version and build number to 0.12.20 / 20.
 - Corrected Discover header spacing after manual review showed Exit Demo overlapping the Hussle logo and crowding the settings icon.
 - Updated release documentation.
-- Rebuilt `HUSSLE_MASTER_GUIDE.md` as the current permanent source of truth.
+- Rebuilt `HUSSLE_MASTER_GUIDE.md` as the permanent source of truth.
 - Created the required separate `HUSSLE_WORKLOG.md`.
 
 ## Mac verification actually completed
@@ -55,14 +56,35 @@ Build: 20
 - Tony rebuilt/rechecked and confirmed the corrected screen looked normal and worked without observed glitches.
 - Tony explicitly approved v0.12.20 as the latest stable build.
 
-## Not confirmed
+## Validation not confirmed
 
 - Automated unit tests were not confirmed as executed.
 - Automated UI tests were not confirmed as executed.
-- Stable tag has not yet been created.
-- Pull Request to `main` has not yet been merged.
 
-## Important incidents
+## Promotion to main
+
+Pull Request:
+
+```text
+#1 — Promote v0.12.20 Exit Demo to main
+```
+
+Direction:
+
+```text
+candidate/v0.12.20-exit-demo → main
+```
+
+Result:
+
+- PR #1 was successfully merged on 23 July 2026.
+- Merge commit: `1d64a3544b3311a03783ca23dd6a38abe9289d86`.
+- `main` contains marketing version 0.12.20 and build 20.
+- `candidate/v0.12.18-demo-quality` remains at `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`.
+- `candidate/v0.12.20-exit-demo` remains retained for history.
+- `main` is one merge commit ahead of the Candidate while file contents are identical at the promotion point.
+
+## Important incidents and lessons
 
 ### Wrong-build incident before v0.12.20
 
@@ -73,7 +95,7 @@ Permanent prevention:
 - exact source SHA first;
 - new branch from that SHA;
 - clean checkout;
-- `0 changed files` before build;
+- no tracked local changes before build;
 - latest commit downloaded;
 - fresh XcodeGen generation;
 - actual Simulator evidence before claiming success.
@@ -97,18 +119,74 @@ Permanent prevention:
 - inspect every affected header, pushed view, and sheet;
 - reusable overlays require screen-specific spacing review.
 
-## Git/GitHub workflow learned
+### GitHub Desktop instruction mismatch
+
+Earlier instructions referred to controls or screens that were not present in Tony’s current Desktop state.
+
+Permanent prevention:
+
+- use the exact visible English label from the current screenshot;
+- distinguish `Changes`, `History`, and browser GitHub actions;
+- give one verified action at a time;
+- do not assume `No local changes` while generated files are visible.
+
+### Generated Xcode project repeatedly appeared as Changes
+
+`xcodegen generate` created:
+
+```text
+Hussle.xcodeproj/
+```
+
+GitHub Desktop showed four new files because the directory was not ignored.
+
+Permanent resolution:
+
+- `.gitignore` now includes `Hussle.xcodeproj/` in release-finalization maintenance;
+- the folder remains usable locally by Xcode;
+- the generated project must not be committed;
+- tracked source, XcodeGen configuration, and app resources remain the source of truth.
+
+### Stash behavior clarified
+
+Tony stashed five local changes. The modified tracked file moved into `Stashed Changes`, while generated/untracked Xcode project files remained visible.
+
+Permanent lesson:
+
+- stash is temporary local storage, not a commit or branch;
+- do not assume all untracked generated files disappeared;
+- do not restore a stash without inspecting its contents.
+
+### Remote and local state clarified
 
 - GitHub remote and the Mac local repository are separate copies.
 - Remote changes made by ChatGPT do not appear locally until GitHub Desktop fetches/pulls and switches to the branch.
-- `Fetch origin` discovers remote changes.
+- `Fetch origin` discovers remote state.
 - `Pull origin` downloads commits into the current local branch.
 - `Commit` saves local changes into local Git history.
-- `Push origin` uploads local commits to GitHub.
-- When switching branches with unrelated local changes, choose `Leave my changes on [current branch]` rather than bringing them into the target branch.
-- GitHub Desktop/browser is the default workflow for Tony; Terminal authentication is not required for routine synchronization and promotion.
+- `Push origin` uploads local commits or tags to GitHub.
+- `Changes` is only the local difference list, not the full repository tree.
+- `History` shows committed history of the selected branch.
+- `Stashed Changes` is temporary local storage.
 
-## Files changed for v0.12.20
+### Release-finalization tool incident
+
+During an attempted automated maintenance-branch setup, temporary no-op file commits were accidentally created on `main` and immediately removed. `main` was then explicitly moved back to the verified promotion merge commit:
+
+```text
+1d64a3544b3311a03783ca23dd6a38abe9289d86
+```
+
+A follow-up comparison confirmed `main` was identical to that exact commit before the real maintenance branch was created.
+
+Permanent prevention:
+
+- create the branch first with `create_branch` from an exact SHA;
+- never probe branch existence by writing files;
+- verify `main` after every remote write;
+- keep maintenance changes isolated from stable `main` until reviewed.
+
+## Files changed for v0.12.20 product work
 
 Code and tests:
 
@@ -133,6 +211,16 @@ Documentation:
 - `HUSSLE_MASTER_GUIDE.md`
 - `HUSSLE_WORKLOG.md`
 
+Release-finalization maintenance:
+
+- `.gitignore`
+- `CHANGELOG.md`
+- `Docs/Releases/CHANGELOG_v01220.md`
+- `Docs/Releases/CURRENT_STATUS_v01220.md`
+- `Docs/Releases/RELEASE_AUDIT_v01220.md`
+- `HUSSLE_MASTER_GUIDE.md`
+- `HUSSLE_WORKLOG.md`
+
 ## Preserved without modification
 
 - `candidate/v0.12.18-demo-quality`;
@@ -146,22 +234,28 @@ Documentation:
 
 Tony approved v0.12.20 as the Last Approved Build.
 
-The build becomes fully promoted after the final documentation commit is downloaded locally, tagged `v0.12.20-stable`, and merged into `main`.
+`main` already contains the approved product through PR #1. The final stable tag must be created only after release-finalization maintenance is merged.
+
+## Current maintenance branch
+
+```text
+maintenance/v0.12.20-release-finalization
+```
+
+Purpose:
+
+- ignore generated `Hussle.xcodeproj/`;
+- align all release documentation with the already completed PR #1 merge;
+- document GitHub Desktop behavior and today’s incidents;
+- prepare the final stable tag point.
 
 ## Next exact step
 
-In GitHub Desktop:
-
-1. Stay on `candidate/v0.12.20-exit-demo`.
-2. Click **Fetch origin**.
-3. Click **Pull origin** when offered.
-4. Confirm the final documentation commit is at the top of **History**.
-5. Right-click the top commit and choose **Create Tag…**.
-6. Create `v0.12.20-stable` and push it.
-7. Click **Preview Pull Request**.
-8. Confirm `base: main` and `compare: candidate/v0.12.20-exit-demo`.
-9. Create and merge the Pull Request in the browser.
-10. Do not delete the v0.12.18 or v0.12.20 branches yet.
-11. Return to GitHub Desktop and click **Fetch origin**.
+1. Review the maintenance branch diff against `main`.
+2. Merge the maintenance Pull Request into `main`.
+3. Create and push `v0.12.20-stable` on the final `main` commit.
+4. In GitHub Desktop, press **Fetch origin**.
+5. Keep the v0.12.18 and v0.12.20 Candidate branches.
+6. Do not restore the existing stash until its contents are intentionally reviewed.
 
 ---

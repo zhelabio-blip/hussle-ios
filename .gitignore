@@ -1,6 +1,8 @@
-
 # Local secrets
 Configs/Secrets.xcconfig
 
 # macOS metadata
 .DS_Store
+
+# XcodeGen output
+Hussle.xcodeproj/

@@ -4,9 +4,13 @@
 
 **Last updated:** 23 July 2026  
 **Last Approved Build:** `v0.12.20 — Exit Demo`  
-**Approved branch:** `candidate/v0.12.20-exit-demo`  
+**Current stable branch:** `main`  
+**Approved Candidate branch:** `candidate/v0.12.20-exit-demo`  
 **Approved code commit:** `c0540bc273e35be036ff46b9a9b6cd2c841bd9ef`  
-**Release promotion status:** documentation is being finalized; stable tag and `main` promotion are the next exact steps.  
+**Final Candidate documentation commit:** `dfba6921aa784d6575f8d0a485682ae98c7035bf`  
+**Promotion PR:** `#1 — Promote v0.12.20 Exit Demo to main`  
+**Promotion merge commit:** `1d64a3544b3311a03783ca23dd6a38abe9289d86`  
+**Stable tag:** `v0.12.20-stable` is still pending and must be created on the final `main` commit after release-finalization maintenance is merged.  
 **Repository:** `zhelabio-blip/hussle-ios`
 
 ---
@@ -15,15 +19,15 @@
 
 Before changing Hussle:
 
-1. Read this guide.
+1. Read this guide and `HUSSLE_WORKLOG.md`.
 2. Inspect the exact source branch and commit.
 3. Inspect relevant code, UI, navigation, data flow, integrations, and side effects.
 4. Confirm one exact task.
-5. Create a new Candidate branch from the approved source commit.
+5. Create a new Candidate or maintenance branch from the approved source commit.
 6. Change only the approved scope.
 7. Review the diff.
 8. Build and test honestly.
-9. Update `HUSSLE_MASTER_GUIDE.md` and `HUSSLE_WORKLOG.md`.
+9. Update this guide and the worklog.
 10. Promote only after Tony explicitly approves the build.
 
 The repository and its documentation are the source of truth. Chat memory is not sufficient.
@@ -32,17 +36,19 @@ The repository and its documentation are the source of truth. Chat memory is not
 
 # 2. Release governance
 
-## Build labels
-
-### Candidate Build
+## Candidate Build
 
 Any new build remains a Candidate Build while it is being created or tested.
 
 A Candidate Build must not replace the approved baseline automatically.
 
-### Last Approved Build
+## Last Approved Build
 
-A Candidate becomes the Last Approved Build only after Tony explicitly approves it.
+A Candidate becomes the Last Approved Build only after Tony explicitly says the equivalent of:
+
+```text
+Сборка утверждена
+```
 
 Current Last Approved Build:
 
@@ -50,7 +56,7 @@ Current Last Approved Build:
 v0.12.20 — Exit Demo
 ```
 
-Tony approved v0.12.20 as the latest stable build on 23 July 2026 after launching it in Xcode and manually checking the corrected Demo experience in Simulator.
+Tony approved v0.12.20 on 23 July 2026 after Xcode generated the project, the app built and launched in Simulator, the initial header collision was corrected, and the corrected Demo experience was manually rechecked.
 
 ## Stable-history rule
 
@@ -111,32 +117,36 @@ For v0.12.20:
 - manual requested-flow review: completed;
 - Exit Demo header collision: found during manual review and fixed;
 - corrected header: manually reviewed and accepted;
-- automated unit/UI test execution: not confirmed in this session.
+- automated unit/UI test execution: not confirmed.
 
 ---
 
 # 3. Current repository state
 
-## Approved build
+## Stable product state
+
+```text
+main
+└── contains approved v0.12.20 after merged PR #1
+```
+
+The promotion merge commit is:
+
+```text
+1d64a3544b3311a03783ca23dd6a38abe9289d86
+```
+
+A later documentation-only maintenance merge may advance `main` beyond that SHA without changing app behavior.
+
+## Approved Candidate retained for history
 
 ```text
 Branch: candidate/v0.12.20-exit-demo
+Final Candidate commit: dfba6921aa784d6575f8d0a485682ae98c7035bf
 Approved code commit: c0540bc273e35be036ff46b9a9b6cd2c841bd9ef
 Marketing version: 0.12.20
 Build number: 20
 ```
-
-Documentation-only commits may follow the approved code commit before the stable tag is created. The final stable tag must point to the branch head after documentation is finalized.
-
-## Promotion still required
-
-The approved build is not fully promoted until:
-
-1. GitHub Desktop downloads the final documentation commit.
-2. Tag `v0.12.20-stable` is created on the final branch head and pushed.
-3. A Pull Request is created from `candidate/v0.12.20-exit-demo` to `main`.
-4. The Pull Request is merged on GitHub.
-5. GitHub Desktop fetches the updated remote state.
 
 ## Preserved previous build
 
@@ -145,7 +155,23 @@ Branch: candidate/v0.12.18-demo-quality
 Commit: 88d7195078a56bb30b68bd8cfff40f6ef72c26c3
 ```
 
-Do not modify or delete this branch during v0.12.20 promotion.
+Do not modify or delete either retained Candidate branch without explicit approval.
+
+## Release administration status
+
+Completed:
+
+- Tony approved v0.12.20;
+- final Candidate documentation was committed;
+- PR #1 was created and merged into `main`;
+- version 0.12.18 remains preserved;
+- generated `Hussle.xcodeproj/` is excluded through `.gitignore` in release-finalization maintenance.
+
+Still required:
+
+- merge release-finalization maintenance into `main`;
+- create and push stable tag `v0.12.20-stable` on the resulting final `main` commit;
+- fetch the final remote state in GitHub Desktop.
 
 ---
 
@@ -155,7 +181,7 @@ Do not modify or delete this branch during v0.12.20 promotion.
 
 **Hussle**
 
-Earlier names included Humper and Humpr. Hussle is the current working product name until Tony explicitly changes it.
+Earlier names included Humper and Humpr. Hussle remains the working product name until Tony explicitly changes it.
 
 ## Platform
 
@@ -215,7 +241,7 @@ Approved visual direction:
 
 ## Layout rule
 
-No text, logo, badge, button, or safe-area control may overlap or crowd another control.
+No text, logo, badge, button, safe-area control, or navigation icon may overlap or crowd another control.
 
 A technically functional control is not acceptable if it visually collides with branding or navigation.
 
@@ -278,7 +304,7 @@ Important approved replacements:
 - Luna: long-haired white Chihuahua with brown patches on a seaside bench;
 - James: slim blond English man by a lake.
 
-## Demo structure
+Demo structure:
 
 - Charlie is the current profile.
 - Seven other dogs appear in Discover.
@@ -349,8 +375,6 @@ c0540bc273e35be036ff46b9a9b6cd2c841bd9ef
 
 # 9. Architecture and data rules
 
-## Existing architecture
-
 Verified repository structure includes:
 
 - SwiftUI views;
@@ -359,8 +383,6 @@ Verified repository structure includes:
 - Demo data through `MockData`;
 - Supabase-oriented authentication, profile, discovery, swipe, chat, safety, storage, and realtime services;
 - separate Demo and real-account behavior.
-
-## Stability rule
 
 Do not redesign working architecture without an approved reason.
 
@@ -380,11 +402,17 @@ Before every change inspect:
 
 `Configs/Secrets.xcconfig` is local and must never be committed.
 
-## Generated project
+## Generated Xcode project
 
-`Hussle.xcodeproj` is generated locally by XcodeGen.
+`Hussle.xcodeproj/` is generated locally by XcodeGen.
 
-It may appear as an untracked local folder after generation. Do not commit it unless repository policy is explicitly changed.
+Repository policy:
+
+- it remains available locally for Xcode;
+- it is not a source-of-truth project artifact;
+- it must not be committed;
+- `.gitignore` must contain `Hussle.xcodeproj/`;
+- XcodeGen configuration and source files are the tracked source of truth.
 
 ---
 
@@ -392,7 +420,7 @@ It may appear as an untracked local folder after generation. Do not commit it un
 
 Generate clean source assets only.
 
-## Dog image
+Dog image:
 
 - dog only;
 - one animal;
@@ -402,7 +430,7 @@ Generate clean source assets only.
 - no text;
 - no profile card.
 
-## Owner image
+Owner image:
 
 - owner only;
 - no dog;
@@ -410,22 +438,11 @@ Generate clean source assets only.
 - no UI;
 - no text.
 
-## Diversity
-
-Maintain strong variation across:
-
-- breeds and coloration;
-- ethnicity;
-- age;
-- body type;
-- hairstyle;
-- clothing;
-- pose;
-- background.
+Maintain variation across breed, coloration, ethnicity, age, body type, hairstyle, clothing, pose, and background.
 
 Avoid near-duplicate characters and repetitive green-park backgrounds.
 
-## File structure
+File locations:
 
 ```text
 Assets/DemoLibrary/Dogs
@@ -439,118 +456,86 @@ Use stable lowercase filenames and do not rename accepted assets casually after 
 
 # 11. Git, GitHub, and Mac workflow
 
-## Separate copies
+## Three separate layers
 
-There are two separate working locations:
+1. **GitHub remote:** online branches, commits, Pull Requests, and tags.
+2. **Local Git repository:** branches, commits, and stash stored on Tony’s Mac.
+3. **Working folder:** the files currently visible to Xcode and Finder.
 
-1. remote repository on GitHub;
-2. local repository on Tony’s Mac.
+Only one local branch is checked out into the working folder at a time.
 
-Creating or editing a branch on GitHub does not automatically change files on the Mac.
+## GitHub Desktop map
 
-## GitHub Desktop actions
-
-- **Fetch origin:** learn about new remote branches and commits without applying them to working files.
-- **Pull origin:** download remote commits into the currently selected local branch.
+- **Current Repository:** which local repository folder is open.
+- **Current Branch:** which local branch is currently checked out.
+- **Changes:** local files differing from the current branch’s latest local commit.
+- **History:** already committed history of the selected branch.
+- **Stashed Changes:** temporarily hidden local changes; not a branch and not uploaded.
+- **Fetch origin:** learn about remote changes without applying them to working files.
+- **Pull origin:** download remote commits into the selected local branch.
 - **Commit:** save selected local changes into local Git history.
-- **Push origin:** upload local commits to GitHub.
+- **Push origin:** upload local commits or tags to GitHub.
 
 ## Remote-first assistant workflow
 
 When ChatGPT changes GitHub through the connected GitHub tool:
 
 1. the remote branch changes first;
-2. Tony presses `Fetch origin` in GitHub Desktop;
+2. Tony presses **Fetch origin**;
 3. Tony selects the required branch;
-4. Tony presses `Pull origin` when offered;
+4. Tony presses **Pull origin** when offered;
 5. only then do the updated files exist locally on the Mac.
+
+## Why Changes can appear without editing code
+
+Tools can create local generated or user-specific files:
+
+- `xcodegen generate` creates `Hussle.xcodeproj/`;
+- Xcode can update user-state files;
+- builds can update local generated metadata.
+
+These are not remote GitHub changes. `Fetch origin` does not create them; it can merely refresh the Desktop display and make existing local files visible again.
+
+## Stash rule
+
+Stash temporarily hides local changes.
+
+- it does not commit them;
+- it does not upload them;
+- it may not remove unrelated untracked generated files unless those files are included in the stash operation;
+- do not restore a stash without inspecting what it contains.
 
 ## Branch-switch safety
 
 When GitHub Desktop asks what to do with local changes while switching branches:
 
-- choose **Leave my changes on [current branch]** when the changes must not move into the target branch;
-- do not choose **Bring my changes to [target branch]** unless mixing those local changes is explicitly intended.
+- choose **Leave my changes on [current branch]** when changes must not move into the target branch;
+- do not choose **Bring my changes to [target branch]** unless mixing those changes is explicitly intended.
 
-After switching to a clean Candidate branch, confirm `0 changed files` before building.
+After switching to a Candidate branch, confirm the Changes list contains no tracked source changes before building.
 
 ## Authentication
 
 Use GitHub Desktop/browser authentication for routine work.
 
-Do not enter:
+Do not enter Google, ordinary GitHub, or Mac passwords into Git HTTPS prompts.
 
-- Google password;
-- ordinary GitHub password;
-- Mac password;
-
-into Git HTTPS prompts. Terminal HTTPS operations require a properly configured credential or Personal Access Token, but Terminal authentication is not required for the approved Desktop workflow.
+Terminal HTTPS operations require a configured credential or Personal Access Token, but Terminal authentication is not required for the approved Desktop workflow.
 
 ---
 
 # 12. Permanent lessons from 23 July 2026
 
-## Lesson 1 — branch creation must use the exact approved commit
-
-Never create a Candidate from a branch whose ancestry has not been checked.
-
-Required evidence:
-
-- exact source branch;
-- exact source SHA;
-- merge base comparison;
-- reviewed diff.
-
-## Lesson 2 — GitHub access does not prove the Mac is running that branch
-
-Before a build, verify in GitHub Desktop:
-
-- current branch;
-- clean Changes list;
-- latest remote commit downloaded.
-
-A correct remote branch can still be tested incorrectly if the Mac is on `main`, has local changes, or is using a stale generated Xcode project.
-
-## Lesson 3 — never describe a screenshot from expectation
-
-Only describe what is actually visible.
-
-Do not infer a dog, screen, control, or version that is not shown.
-
-## Lesson 4 — a successful compile is not complete visual QA
-
-The first v0.12.20 build compiled and launched, but Exit Demo overlapped the Hussle logo.
-
-Therefore every UI change requires a visual pass on all affected screens, not only compile success.
-
-## Lesson 5 — global overlays need screen-specific spacing review
-
-A reusable safe-area control can conflict with custom headers.
-
-Before handoff, inspect:
-
-- branding;
-- navigation buttons;
-- settings icons;
-- sheets;
-- pushed views;
-- small-screen layouts.
-
-## Lesson 6 — documentation must be finalized before tagging
-
-The stable tag must point to the branch head after:
-
-- code approval;
-- release status update;
-- release audit update;
-- master guide update;
-- worklog update.
-
-## Lesson 7 — GitHub Desktop is the default beginner-safe workflow
-
-Prefer exact English UI labels and one action at a time.
-
-Do not require Terminal authentication when Desktop/browser can perform the same operation safely.
+1. Branch creation must use the exact approved commit.
+2. GitHub access does not prove the Mac is running that branch.
+3. Only describe what is actually visible in screenshots.
+4. A successful compile is not complete visual QA.
+5. Global overlays need screen-specific spacing review.
+6. Documentation must be finalized before tagging.
+7. GitHub Desktop is the default beginner-safe workflow for Tony.
+8. Generated `Hussle.xcodeproj/` must be ignored so it does not repeatedly appear as project work.
+9. `Changes` is not the repository tree; it is only the local difference list.
+10. A merged Pull Request can put `main` one merge commit ahead of the Candidate while file contents remain identical.
 
 ---
 
@@ -577,12 +562,13 @@ Do not require Terminal authentication when Desktop/browser can perform the same
 - reusable Exit Demo control;
 - Demo reset to real authentication screen;
 - broad navigation and modal coverage;
-- UI test coverage added but execution not confirmed;
+- UI test definitions added but execution not confirmed;
 - release gate expanded;
 - Discover header collision found and corrected;
 - Xcode build and Simulator launch succeeded on Tony’s Mac;
 - corrected UX manually accepted;
-- Tony approved v0.12.20 as latest stable build.
+- Tony approved v0.12.20;
+- PR #1 merged v0.12.20 into `main`.
 
 ---
 
@@ -606,30 +592,19 @@ New ideas go into backlog and do not override approved architecture, UX, workflo
 
 # 15. Next exact step
 
-After this documentation commit appears on GitHub:
-
-1. In GitHub Desktop, stay on `candidate/v0.12.20-exit-demo`.
-2. Press **Fetch origin**.
-3. Press **Pull origin** when offered.
-4. Confirm the documentation commit is the top item in **History**.
-5. Create and push tag:
+1. Merge `maintenance/v0.12.20-release-finalization` into `main`.
+2. Confirm `main` contains the generated-project ignore rule and finalized documentation.
+3. Create and push tag:
 
 ```text
 v0.12.20-stable
 ```
 
-6. Create a Pull Request:
+on the final `main` commit.
 
-```text
-base: main
-compare: candidate/v0.12.20-exit-demo
-```
-
-7. Merge it on GitHub.
-8. Do not delete `candidate/v0.12.18-demo-quality` or `candidate/v0.12.20-exit-demo` yet.
-9. Return to GitHub Desktop and press **Fetch origin**.
-
-After promotion, the next development branch must be created from `main` or `v0.12.20-stable`, not from memory or an older local branch.
+4. In GitHub Desktop, press **Fetch origin**.
+5. Keep `candidate/v0.12.18-demo-quality` and `candidate/v0.12.20-exit-demo` for history.
+6. Create the next development Candidate from final `main` or `v0.12.20-stable`.
 
 ---
 
