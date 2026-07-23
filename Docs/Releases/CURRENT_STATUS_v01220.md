@@ -1,6 +1,6 @@
 # Current Status — v0.12.20
 
-**Status:** Last Approved Build; product and release-finalization maintenance are in `main`.  
+**Status:** Last Approved Build; product, repository hygiene, and finalized release documentation are in `main`.  
 **Source branch:** `candidate/v0.12.18-demo-quality`  
 **Exact source commit:** `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`  
 **Approved Candidate branch:** `candidate/v0.12.20-exit-demo`  
@@ -8,7 +8,8 @@
 **Final Candidate documentation commit:** `dfba6921aa784d6575f8d0a485682ae98c7035bf`  
 **Product promotion merge commit:** `1d64a3544b3311a03783ca23dd6a38abe9289d86`  
 **Release-finalization merge commit:** `718e1aa4315d5e13c12080394203da086db35147`  
-**Stable tag:** pending on the final `main` commit after this post-merge documentation record is merged.
+**Post-merge documentation record:** `c3b8001ff50d3c9268b65fbc34e42bff4ae2aa3a`  
+**Stable tag:** pending on the final current `main` commit.
 
 ## Approved scope
 
@@ -54,6 +55,7 @@ v0.12.20 adds one product behavior:
 - Tony explicitly approved v0.12.20 as the latest stable build.
 - Pull Request #1 merged `candidate/v0.12.20-exit-demo` into `main`.
 - Pull Request #2 merged repository hygiene and release-documentation alignment into `main`.
+- Pull Request #3 recorded the completed finalization in permanent documentation.
 
 ## Validation not confirmed
 
@@ -75,10 +77,17 @@ It:
 - documented GitHub Desktop, stash, generated-file, and release-process lessons;
 - changed no app code, Demo data, assets, backend schema, or product behavior.
 
+PR #3 merged:
+
+```text
+maintenance/v0.12.20-post-merge-record → main
+```
+
+It recorded PR #2 as completed and changed documentation only.
+
 ## Remaining release administration
 
-1. Merge `maintenance/v0.12.20-post-merge-record` into `main`.
-2. Create and push `v0.12.20-stable` on the resulting final `main` commit.
-3. In GitHub Desktop, press **Fetch origin**.
-4. Keep `candidate/v0.12.18-demo-quality` and `candidate/v0.12.20-exit-demo` for history.
-5. Do not restore the existing local stash until its contents are intentionally reviewed.
+1. Create and push `v0.12.20-stable` on the final current `main` commit.
+2. In GitHub Desktop, press **Fetch origin**.
+3. Keep `candidate/v0.12.18-demo-quality` and `candidate/v0.12.20-exit-demo` for history.
+4. Do not restore the existing local stash until its contents are intentionally reviewed.
