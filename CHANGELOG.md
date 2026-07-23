@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.12.20 — Exit Demo
+- Created a clean candidate directly from `candidate/v0.12.18-demo-quality` commit `88d7195078a56bb30b68bd8cfff40f6ef72c26c3`.
+- Added a compact secondary `Exit Demo` control while Demo Mode is active.
+- Kept the control available through onboarding, all main tabs, pushed navigation screens, Match, Report, and nested vaccination sheets.
+- Added a dedicated Demo reset that returns to the real Sign Up / Log In screen without changing the real-account flow.
+- Preserved the approved v0.12.18 Demo Library, dog-owner pairs, Discover presentation, Match composition, onboarding order, and backend behavior.
+- Added UI tests and release-gate checks for Exit Demo.
+- Updated the app version to 0.12.20 (build 20).
+- Static verification is required before macOS build; Xcode compile and Simulator verification remain required on Tony’s Mac.
+
 ## v0.12.18 — Demo Quality Update
 - Replaced the bundled Demo library with 16 approved PNG portraits: eight dogs and eight owners.
 - Added Max with Daniel and Nala with Olivia to the Demo journey.
