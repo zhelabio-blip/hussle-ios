@@ -36,7 +36,8 @@ struct MockData {
         bio: "Friendly, calm and great with other dogs.",
         ownerName: "Tony",
         city: "Da Nang, Vietnam",
-        imageName: "dog-charlie", ownerImageName: "owner-tony"
+        imageName: "dog-charlie", ownerImageName: "owner-tony",
+        activityStatus: "Active today"
     )
 
     static let dogs: [Dog] = [
@@ -45,35 +46,56 @@ struct MockData {
             purposes: [.breeding, .walks], primaryPurpose: .breeding, isTopMatch: true,
             vaccinations: [rabies, dhpp], hasHealthInfo: true, hasPedigree: true, isSterilized: false,
             bio: "Sweet, playful and social. Comfortable around people and other small dogs.",
-            ownerName: "Anna", city: "Da Nang, Vietnam", imageName: "dog-luna", ownerImageName: "owner-anna"
+            ownerName: "Anna", city: "Da Nang, Vietnam", imageName: "dog-luna", ownerImageName: "owner-anna",
+            activityStatus: "Active today", recommendationReason: "Same breed · Shared goal: Breeding"
         ),
         Dog(
             id: UUID(), name: "Milo", dateOfBirth: yearsAgo(4), sex: .male, breed: "Poodle", distanceKm: 4.1,
             purposes: [.walks, .friends], primaryPurpose: .walks, isTopMatch: false,
             vaccinations: [rabies, dhpp], hasHealthInfo: true, hasPedigree: false, isSterilized: true,
             bio: "Energetic, affectionate and always ready for a long walk.",
-            ownerName: "James", city: "Da Nang, Vietnam", imageName: "dog-milo", ownerImageName: "owner-james"
+            ownerName: "James", city: "Da Nang, Vietnam", imageName: "dog-milo", ownerImageName: "owner-james",
+            activityStatus: "Available this weekend", recommendationReason: "Shared goal: Walks"
         ),
         Dog(
             id: UUID(), name: "Buddy", dateOfBirth: yearsAgo(2), sex: .male, breed: "Dachshund", distanceKm: 6.3,
             purposes: [.friends, .walks], primaryPurpose: .friends, isTopMatch: false,
             vaccinations: [rabies], hasHealthInfo: false, hasPedigree: false, isSterilized: true,
             bio: "Curious, funny and very social with calm dogs.",
-            ownerName: "Minh", city: "Da Nang, Vietnam", imageName: "dog-buddy", ownerImageName: "owner-minh"
+            ownerName: "Minh", city: "Da Nang, Vietnam", imageName: "dog-buddy", ownerImageName: "owner-minh",
+            activityStatus: "Active today", recommendationReason: "Shared goal: Walks"
         ),
         Dog(
             id: UUID(), name: "Coco", dateOfBirth: yearsAgo(3), sex: .female, breed: "Bichon Frise", distanceKm: 8.7,
             purposes: [.walks, .friends], primaryPurpose: .friends, isTopMatch: false,
             vaccinations: [rabies, dhpp], hasHealthInfo: true, hasPedigree: false, isSterilized: true,
             bio: "Gentle, cheerful and happiest around friendly small dogs.",
-            ownerName: "Sophie", city: "Hoi An, Vietnam", imageName: "dog-coco", ownerImageName: "owner-sophie"
+            ownerName: "Sophie", city: "Hoi An, Vietnam", imageName: "dog-coco", ownerImageName: "owner-sophie",
+            activityStatus: "Active this week", recommendationReason: "Shared goal: Walks"
         ),
         Dog(
-            id: UUID(), name: "Zoe", dateOfBirth: yearsAgo(2), sex: .female, breed: "Yorkshire Terrier", distanceKm: 12.0,
+            id: UUID(), name: "Zoe", dateOfBirth: yearsAgo(2), sex: .female, breed: "Golden Retriever", distanceKm: 12.0,
             purposes: [.friends], primaryPurpose: .friends, isTopMatch: false,
             vaccinations: [rabies], hasHealthInfo: true, hasPedigree: true, isSterilized: false,
             bio: "Confident, lively and interested in making new dog friends.",
-            ownerName: "Emma", city: "Hoi An, Vietnam", imageName: "dog-zoe", ownerImageName: "owner-emma"
+            ownerName: "Emma", city: "Hoi An, Vietnam", imageName: "dog-zoe", ownerImageName: "owner-emma",
+            activityStatus: "Active this week", recommendationReason: "Suggested nearby"
+        ),
+        Dog(
+            id: UUID(), name: "Max", dateOfBirth: yearsAgo(3), sex: .male, breed: "French Bulldog", distanceKm: 10.4,
+            purposes: [.walks, .friends], primaryPurpose: .walks, isTopMatch: false,
+            vaccinations: [rabies, dhpp], hasHealthInfo: true, hasPedigree: false, isSterilized: true,
+            bio: "Easygoing, curious and always ready to explore the city.",
+            ownerName: "Daniel", city: "Da Nang, Vietnam", imageName: "dog-max", ownerImageName: "owner-daniel",
+            activityStatus: "Available this weekend", recommendationReason: "Shared goal: Walks"
+        ),
+        Dog(
+            id: UUID(), name: "Nala", dateOfBirth: yearsAgo(3), sex: .female, breed: "Cavalier King Charles Spaniel", distanceKm: 5.4,
+            purposes: [.walks, .friends], primaryPurpose: .walks, isTopMatch: false,
+            vaccinations: [rabies, dhpp], hasHealthInfo: true, hasPedigree: true, isSterilized: true,
+            bio: "Gentle, affectionate and happiest on relaxed walks with friendly dogs.",
+            ownerName: "Olivia", city: "Da Nang, Vietnam", imageName: "dog-nala", ownerImageName: "owner-olivia",
+            activityStatus: "Active today", recommendationReason: "Shared goal: Walks"
         )
     ]
 

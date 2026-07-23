@@ -25,6 +25,14 @@ struct MatchView: View {
                     .font(.title3)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
+
+                if !dog.recommendationReason.isEmpty {
+                    Label(dog.recommendationReason, systemImage: "sparkles")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(HussleTheme.primary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 16)
+                }
             }
 
             VStack(spacing: 14) {

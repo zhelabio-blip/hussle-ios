@@ -30,6 +30,8 @@ struct Dog: Identifiable, Hashable {
     var photoData: [Data] = []
     var ownerPhotoData: Data? = nil
     var ownerID: UUID? = nil
+    var activityStatus: String = ""
+    var recommendationReason: String = ""
 
     var age: Int {
         Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year ?? 0

@@ -257,7 +257,19 @@ struct OnboardingView: View {
                 VStack(alignment: .leading, spacing: 7) {
                     RequiredFieldLabel(title: "Breed")
                     Picker("Breed", selection: $draftDog.breed) {
-                        ForEach(["Chihuahua", "Poodle", "Dachshund", "Golden Retriever", "Labrador Retriever", "French Bulldog", "Mixed Breed", "Other"], id: \.self) { Text($0).tag($0) }
+                        ForEach([
+                            "Chihuahua",
+                            "Poodle",
+                            "Dachshund",
+                            "Bichon Frise",
+                            "Yorkshire Terrier",
+                            "Golden Retriever",
+                            "Labrador Retriever",
+                            "French Bulldog",
+                            "Cavalier King Charles Spaniel",
+                            "Mixed Breed",
+                            "Other"
+                        ], id: \.self) { Text($0).tag($0) }
                     }
                     .padding()
                     .background(.white)
@@ -476,9 +488,13 @@ struct OnboardingView: View {
 
 private enum DemoOwnerPhoto {
     static func data(named name: String) -> Data? {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "jpg", subdirectory: "DemoImages")
-                ?? Bundle.main.url(forResource: name, withExtension: "jpg") else { return nil }
-        return try? Data(contentsOf: url)
+        for fileExtension in ["png", "jpg", "jpeg"] {
+            if let url = Bundle.main.url(forResource: name, withExtension: fileExtension, subdirectory: "DemoImages")
+                ?? Bundle.main.url(forResource: name, withExtension: fileExtension) {
+                return try? Data(contentsOf: url)
+            }
+        }
+        return nil
     }
 }
 
