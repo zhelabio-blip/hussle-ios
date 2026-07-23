@@ -10,7 +10,9 @@
 **Final Candidate documentation commit:** `dfba6921aa784d6575f8d0a485682ae98c7035bf`  
 **Promotion PR:** `#1 — Promote v0.12.20 Exit Demo to main`  
 **Promotion merge commit:** `1d64a3544b3311a03783ca23dd6a38abe9289d86`  
-**Stable tag:** `v0.12.20-stable` is still pending and must be created on the final `main` commit after release-finalization maintenance is merged.  
+**Release-finalization PR:** `#2 — Finalize v0.12.20 release documentation`  
+**Release-finalization merge commit:** `718e1aa4315d5e13c12080394203da086db35147`  
+**Stable tag:** `v0.12.20-stable` is the only remaining release-administration action and must point to the final `main` commit after this post-merge documentation record is merged.  
 **Repository:** `zhelabio-blip/hussle-ios`
 
 ---
@@ -127,16 +129,28 @@ For v0.12.20:
 
 ```text
 main
-└── contains approved v0.12.20 after merged PR #1
+└── contains approved v0.12.20
 ```
 
-The promotion merge commit is:
+Product promotion:
 
 ```text
-1d64a3544b3311a03783ca23dd6a38abe9289d86
+PR #1
+candidate/v0.12.20-exit-demo → main
+merge commit: 1d64a3544b3311a03783ca23dd6a38abe9289d86
 ```
 
-A later documentation-only maintenance merge may advance `main` beyond that SHA without changing app behavior.
+Release-finalization maintenance:
+
+```text
+PR #2
+maintenance/v0.12.20-release-finalization → main
+merge commit: 718e1aa4315d5e13c12080394203da086db35147
+```
+
+PR #2 changed repository hygiene and documentation only. It did not change app code, Demo data, assets, backend schema, or product behavior.
+
+The final post-merge documentation record may advance `main` one additional documentation-only merge commit before tagging.
 
 ## Approved Candidate retained for history
 
@@ -163,13 +177,16 @@ Completed:
 
 - Tony approved v0.12.20;
 - final Candidate documentation was committed;
-- PR #1 was created and merged into `main`;
+- PR #1 merged the approved Candidate into `main`;
+- PR #2 merged release-finalization maintenance into `main`;
 - version 0.12.18 remains preserved;
-- generated `Hussle.xcodeproj/` is excluded through `.gitignore` in release-finalization maintenance.
+- version 0.12.20 Candidate remains preserved;
+- generated `Hussle.xcodeproj/` is excluded through `.gitignore`;
+- Master Guide, Worklog, changelog, current status, and release audit were aligned with the merged state.
 
 Still required:
 
-- merge release-finalization maintenance into `main`;
+- merge this post-merge documentation record into `main`;
 - create and push stable tag `v0.12.20-stable` on the resulting final `main` commit;
 - fetch the final remote state in GitHub Desktop.
 
@@ -411,7 +428,7 @@ Repository policy:
 - it remains available locally for Xcode;
 - it is not a source-of-truth project artifact;
 - it must not be committed;
-- `.gitignore` must contain `Hussle.xcodeproj/`;
+- `.gitignore` contains `Hussle.xcodeproj/`;
 - XcodeGen configuration and source files are the tracked source of truth.
 
 ---
@@ -536,6 +553,7 @@ Terminal HTTPS operations require a configured credential or Personal Access Tok
 8. Generated `Hussle.xcodeproj/` must be ignored so it does not repeatedly appear as project work.
 9. `Changes` is not the repository tree; it is only the local difference list.
 10. A merged Pull Request can put `main` one merge commit ahead of the Candidate while file contents remain identical.
+11. Remote writes must be isolated on a branch and verified before merging into stable `main`.
 
 ---
 
@@ -568,7 +586,8 @@ Terminal HTTPS operations require a configured credential or Personal Access Tok
 - Xcode build and Simulator launch succeeded on Tony’s Mac;
 - corrected UX manually accepted;
 - Tony approved v0.12.20;
-- PR #1 merged v0.12.20 into `main`.
+- PR #1 merged v0.12.20 into `main`;
+- PR #2 merged release hygiene and documentation alignment into `main`.
 
 ---
 
@@ -592,18 +611,18 @@ New ideas go into backlog and do not override approved architecture, UX, workflo
 
 # 15. Next exact step
 
-1. Merge `maintenance/v0.12.20-release-finalization` into `main`.
-2. Confirm `main` contains the generated-project ignore rule and finalized documentation.
-3. Create and push tag:
+1. Merge `maintenance/v0.12.20-post-merge-record` into `main`.
+2. Create and push tag:
 
 ```text
 v0.12.20-stable
 ```
 
-on the final `main` commit.
+on the resulting final `main` commit.
 
-4. In GitHub Desktop, press **Fetch origin**.
-5. Keep `candidate/v0.12.18-demo-quality` and `candidate/v0.12.20-exit-demo` for history.
+3. In GitHub Desktop, press **Fetch origin**.
+4. Keep `candidate/v0.12.18-demo-quality` and `candidate/v0.12.20-exit-demo` for history.
+5. Do not restore the existing stash until its contents are intentionally reviewed.
 6. Create the next development Candidate from final `main` or `v0.12.20-stable`.
 
 ---
