@@ -17,9 +17,11 @@
 | Automated unit tests | Not confirmed | No claim of execution |
 | Automated UI tests | Not confirmed | No claim of execution |
 | Approval | Passed | Tony explicitly approved v0.12.20 as the latest stable build on 23 July 2026 |
-| Documentation | Passed after this update | Master guide, worklog, changelog, current status, and release audit aligned |
-| Stable tag | Pending release administration | Create `v0.12.20-stable` after pulling the final documentation commit |
-| `main` promotion | Pending release administration | Merge PR from `candidate/v0.12.20-exit-demo` to `main` |
+| Candidate documentation | Passed | Final Candidate documentation commit `dfba6921aa784d6575f8d0a485682ae98c7035bf` |
+| `main` promotion | Passed | PR #1 merged `candidate/v0.12.20-exit-demo` into `main`; merge commit `1d64a3544b3311a03783ca23dd6a38abe9289d86` |
+| Generated-project policy | Passed in maintenance | `.gitignore` includes `Hussle.xcodeproj/`; generated Xcode project remains local and untracked |
+| Final documentation alignment | Passed in maintenance | Master Guide, Worklog, changelog, current status, and release audit record the actual merged state |
+| Stable tag | Pending final administration | Create `v0.12.20-stable` on the final `main` commit after maintenance merge |
 
 ## Release decision
 
@@ -27,9 +29,22 @@ v0.12.20 is the Last Approved Build.
 
 The code and corrected UI were built and manually accepted. Automated test execution remains unknown and must not be claimed.
 
-The remaining actions are administrative rather than product changes:
+## Promotion result
 
-1. pull the final documentation commit;
-2. create and push `v0.12.20-stable`;
-3. merge the approved branch into `main`;
-4. retain v0.12.18 and v0.12.20 branches for now.
+Completed:
+
+1. final Candidate documentation committed;
+2. PR #1 created;
+3. PR #1 merged into `main`;
+4. previous v0.12.18 branch retained;
+5. v0.12.20 Candidate branch retained.
+
+Release-finalization maintenance adds only repository hygiene and documentation alignment. It does not change product code or behavior.
+
+## Remaining action
+
+After maintenance is merged into `main`:
+
+1. create and push tag `v0.12.20-stable` on the final `main` commit;
+2. fetch the final state in GitHub Desktop;
+3. retain both approved Candidate branches for history.
