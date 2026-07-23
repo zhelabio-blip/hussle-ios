@@ -54,6 +54,7 @@ struct ReportView: View {
                 Text("Thank you for helping keep Hussle safe.")
             }
         }
+        .demoExitControl()
     }
 
     private func submit() {
