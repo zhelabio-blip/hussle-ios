@@ -30,15 +30,32 @@ struct DiscoverView: View {
     }
 
     private var header: some View {
-        HStack {
+        HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(store.currentDog.name).font(.headline)
                 Text("\(store.currentDog.breed) · \(store.currentDog.age) y.o.").font(.caption).foregroundStyle(.secondary)
             }
-            Spacer()
-            Text("Hussle").font(.title.bold()).foregroundStyle(HussleTheme.primary).accessibilityIdentifier("discoverTitle")
-            Spacer()
-            NavigationLink { DiscoverySettingsView() } label: { Image(systemName: "slider.horizontal.3").font(.title3) }
+
+            Spacer(minLength: 8)
+
+            Text("Hussle")
+                .font(.title.bold())
+                .foregroundStyle(HussleTheme.primary)
+                .accessibilityIdentifier("discoverTitle")
+
+            if !store.isDemoMode {
+                Spacer(minLength: 8)
+            }
+
+            NavigationLink { DiscoverySettingsView() } label: {
+                Image(systemName: "slider.horizontal.3").font(.title3)
+            }
+
+            if store.isDemoMode {
+                Color.clear
+                    .frame(width: 88)
+                    .accessibilityHidden(true)
+            }
         }
         .padding(.vertical, 6)
     }
